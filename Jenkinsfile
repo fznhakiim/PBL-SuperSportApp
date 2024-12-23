@@ -19,16 +19,15 @@ pipeline {
         stage('Push Changes') {
             steps {
                 script {
-                    sh '''
-                    #!/bin/bash
-                    REPO_PATH=$(pwd)  # Path ke workspace Jenkins
-                    cd $REPO_PATH
+                    bat '''
+                    REM Path ke workspace Jenkins
+                    SET REPO_PATH=%cd%
 
-                    # Tambahkan perubahan dan commit
+                    REM Tambahkan perubahan dan commit
                     git add .
-                    git commit -m "Auto commit by Jenkins at $(date)"
+                    git commit -m "Auto commit by Jenkins at %DATE% %TIME%"
 
-                    # Push ke branch main
+                    REM Push ke branch main
                     git push origin main
                     '''
                 }
